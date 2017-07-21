@@ -1,15 +1,29 @@
-﻿using System;
+﻿using AutoMapper;
+using AutoMapperConsole.Entity;
+using AutoMapperConsole.Maps;
+using AutoMapperConsole.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoMapperConsole
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            //Load once
+            AutoMapperConfiguration.Configure();
+
+            //Mapping one item
+            Camera item = HelperList.GetList().First();
+
+            CameraVM itemVM = Mapper.Map<Camera, CameraVM>(item);
+
+            //Mapping Collections
+
+            List<Camera> items = HelperList.GetList();
+
+            List<CameraVM> itemsVM = Mapper.Map<List<Camera>, List<CameraVM>>(items);
         }
     }
 }
